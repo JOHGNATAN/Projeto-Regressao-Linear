@@ -29,9 +29,6 @@
 # 
 # Dataset está na pasta "Dados" com o nome "HousePrices_HalfMil.csv" em usa como separador ";".
 
-# In[19]:
-
-
 import pandas as pd 
 import seaborn as sns
 import numpy as np
@@ -52,8 +49,6 @@ dados
 
 # ## Estatísticas descritivas
 
-# In[20]:
-
 
 dados.describe().round(2)
 
@@ -63,8 +58,6 @@ dados.describe().round(2)
 # <p style='font-size: 18px; line-height: 2; margin: 10px 50px; text-align: justify;'>O <b>coeficiente de correlação</b> é uma medida de associação linear entre duas variáveis e situa-se entre <b>-1</b> e <b>+1</b> sendo que <b>-1</b> indica associação negativa perfeita e <b>+1</b> indica associação positiva perfeita.</p>
 # 
 # 
-
-# In[21]:
 
 
 dados.corr().round(4)
@@ -80,9 +73,6 @@ dados.corr().round(4)
 # ## Box plot da variável *dependente* (X)
 # 
 # 
-
-# In[22]:
-
 
 ax = sns.boxplot(dados.precos, orient='h', width=0.2)
 ax.figure. set_size_inches(12,6)
@@ -107,8 +97,6 @@ ax
 
 # ### Box-plot (Preço X Garagem)
 
-# In[23]:
-
 
 ax = sns.boxplot(x = 'garagem', y = 'precos', data = dados, orient='v', width=0.5)
 ax.figure.set_size_inches(12,6)
@@ -119,8 +107,6 @@ ax
 
 
 # ### Box-plot (Preço X Banheiros)
-
-# In[24]:
 
 
 ax = sns.boxplot(x = 'banheiros', y = 'precos', data = dados, orient='v', width=0.5)
@@ -133,8 +119,6 @@ ax
 
 # ### Box-plot (Preço X Lareira)
 
-# In[25]:
-
 
 ax = sns.boxplot(x = 'lareira', y = 'precos', data = dados, orient='v', width=0.5)
 ax.figure.set_size_inches(12,6)
@@ -145,9 +129,6 @@ ax
 
 
 # ### Box-plot (Preço X Acabamento em Mármore)
-
-# In[26]:
-
 
 ax = sns.boxplot(x = 'precos', y = 'marmore', data = dados, orient='h', width=0.5)
 ax.set_title('Preço X Acabamento em Mármore', fontsize=18)
@@ -165,9 +146,6 @@ ax
 
 # ### Box-plot (Preço X Andares)
 
-# In[27]:
-
-
 ax = sns.boxplot(x = 'andares', y = 'precos', data = dados, orient='v', width=0.4)
 ax.figure.set_size_inches(12,6)
 ax.set_title('Preço X Andares', fontsize=18)
@@ -183,8 +161,6 @@ ax
 # ## Distribuição de frequências da variável *dependente* (y)
 # 
 
-# In[28]:
-
 
 ax = sns.distplot(dados.precos)
 ax.figure.set_size_inches(12,6)
@@ -199,14 +175,9 @@ ax.set_xlabel('$', fontsize=18)
 # 
 # 
 
-# In[29]:
-
 
 ax = sns.pairplot(dados, y_vars = 'precos', x_vars = ['area', 'garagem', 'banheiros', 'lareira', 'marmore','andares'])
 ax.fig.suptitle('Dispersão entre Variáveis', fontsize=20, y = 1.2)
-
-
-# In[30]:
 
 
 ax = sns.pairplot(dados, y_vars = 'precos', x_vars = ['area', 'garagem', 'banheiros', 'lareira', 'marmore','andares'],
@@ -219,27 +190,18 @@ ax.fig.suptitle('Dispersão entre Variáveis', fontsize=20, y = 1.2)
 
 # ## Separando os dados para Teste e Treino.
 
-# In[31]:
-
 
 y = dados.precos
 
 
-# In[32]:
-
 
 X = dados[['area', 'garagem', 'banheiros', 'lareira', 'marmore','andares']]
-
-
-# In[33]:
 
 
 X_train,X_test,y_train,y_test = train_test_split(X, y, test_size=0.3, random_state=2811)
 
 
 # ## Instanciando a classe *LinearRegression()*
-
-# In[34]:
 
 
 modelo = LinearRegression()
@@ -248,16 +210,12 @@ modelo = LinearRegression()
 # ## Estimando o modelo linear com os dados de TREINO
 # 
 
-# In[35]:
-
 
 modelo.fit(X_train, y_train)
 
 
 # ## Obtendo o coeficiente de determinação (R²) do modelo estimado com os dados de TREINO
 # 
-
-# In[36]:
 
 
 print('R² = {}'.format(modelo.score(X_train, y_train).round(2)))
@@ -272,18 +230,12 @@ print('R² = {}'.format(modelo.score(X_train, y_train).round(2)))
 # 
 # 
 
-# In[37]:
-
-
 y_previsto = modelo.predict(X_test)
 
 
 # ## Obtendo o coeficiente de determinação (R²) para as previsões do nosso modelo
 # 
 # 
-
-# In[38]:
-
 
 print('R² = {}'.format(metrics.r2_score(y_test, y_previsto).round(2)))
 
@@ -298,9 +250,6 @@ print('R² = {}'.format(metrics.r2_score(y_test, y_previsto).round(2)))
 # ## Simulador simples
 # 
 # Simulador que gera estimativas de preço a partir de um conjunto de informações de um imóvel.
-
-# In[43]:
-
 
 area = 38
 garagem = 2
